@@ -1,6 +1,8 @@
 import { CompileTemplateMetadata } from '@angular/compiler';
 import { Component, OnInit ,EventEmitter,Output } from '@angular/core';
 import { Todo } from '../../Models/Todo';
+import { NgForm } from '@angular/forms';
+import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-add-todo-form',
@@ -10,18 +12,24 @@ import { Todo } from '../../Models/Todo';
 export class AddTodoFormComponent implements OnInit {
   @Output() newTodoEvent = new EventEmitter<Todo>();
   
-  inputTodo:string = "";
+  // inputTodo:string = "";
+  data: Todo[] = []
 
-  addTodo(){
+  onSubmit(form: NgForm){
+    const {inputTodo} = form.value
+  
+  }
+  addTodo(form: NgForm){
+    const {inputTodo} = form.value
     const todo: Todo={
-      content:this.inputTodo,
+      content:inputTodo,
       completed: false,
       edit:false
     };
 
     this.newTodoEvent.emit(todo)
-    this.inputTodo = ""
-    alert("Sukses Input Todo "+this.inputTodo)
+    form.reset()
+    alert("Sukses Input Todo ")
   }
 
   constructor() { }

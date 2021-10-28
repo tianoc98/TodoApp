@@ -1,11 +1,14 @@
-<form>
+<form (ngSubmit)="addTodo(todoForm)" #todoForm = "ngForm">
     <div class="input-group mb-3">
         <input 
         type="text"
         name="inputTodo"
         placeholder="ENTER todo "
         class = "form-control"
-        [(ngModel)]="inputTodo"/>
-        <input type="submit" value="Add Todo" class="btn btn-primary" (click)="addTodo()"/>
+        required ngModel #inputTodo="ngModel" />
+        <button  [disabled] = "inputTodo.invalid" type="submit" value="Add Todo" class="btn btn-primary">Submit</button>
+        <br>
+
     </div>
+    <div [hidden] = "inputTodo.valid" class="alert alert-danger">Todo Tidak Boleh Kosong!!!</div>
 </form>

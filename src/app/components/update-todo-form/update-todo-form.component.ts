@@ -1,5 +1,6 @@
-import { Component, OnInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit,Output,EventEmitter ,Input} from '@angular/core';
 import { Todo } from '../../Models/Todo';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-update-todo-form',
@@ -8,17 +9,19 @@ import { Todo } from '../../Models/Todo';
 })
 export class UpdateTodoFormComponent implements OnInit {
   @Output() newTodoEvent = new EventEmitter<Todo>();
-  inputTodo:string = "";
+  @Input() name :any
 
-  updateTodo(){
+  
+  updateTodo(form: NgForm){
+    const {inputTodo} = form.value
     const todo: Todo={
-      content:this.inputTodo,
+      content:inputTodo,
       completed: false,
       edit:false
     };
 
     this.newTodoEvent.emit(todo)
-    this.inputTodo = ""
+    form.reset()
     alert("Sukses Update Todo ")
   }
   constructor() { }

@@ -1,5 +1,5 @@
 import { isNgTemplate } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Input } from '@angular/core';
 import { Todo } from '../../Models/Todo';
 
 @Component({
@@ -10,6 +10,7 @@ import { Todo } from '../../Models/Todo';
 export class TodoListComponent implements OnInit {
   
   todos:Todo[]=[];
+  
 
   toogleDone(id:number){
     this.todos.map((v, i) =>{
@@ -29,8 +30,7 @@ export class TodoListComponent implements OnInit {
   
   buttonTodo(id:number){
     this.todos.map((v, i) =>{
-      if(i==id) v.edit = true;
-      return v
+      if(i==id) v.edit = true
     })
   }
   updateTodo(todo:Todo, id:number){

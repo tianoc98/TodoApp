@@ -8,7 +8,7 @@
         </div>
         <div class="ms-3 me-auto" *ngIf = "todo.edit == true">
             <div class="content {{(todo.completed ? 'done' : '')}}">
-                <app-update-todo-form (newTodoEvent) = "updateTodo($event,i)"></app-update-todo-form>
+                <app-update-todo-form  [name] = "(todo.content)" (newTodoEvent) = "updateTodo($event,i)"></app-update-todo-form>
                 </div>
             </div>
             <div *ngIf = "todo.edit == false" >

@@ -1,11 +1,20 @@
-<form>
+<form (ngSubmit)="updateTodo(todoForm)" #todoForm = "ngForm">
     <div class="input-group mb-3">
         <input 
         type="text"
         name="inputTodo"
-        placeholder="ENTER todo "
+        placeholder="{{name}} "
         class = "form-control"
-        [(ngModel)]="inputTodo" />
-        <input type="submit" value="Update Todo" class="btn btn-primary" (click)="updateTodo()"/>
+        required  minlength="4" ngModel #inputTodo="ngModel" />
+        <button  [disabled] = "inputTodo.invalid" type="submit" value="Add Todo" class="btn btn-primary">Submit</button>
+
     </div>
+    <div *ngIf="!inputTodo?.valid" style="color:red;">
+        <div *ngIf="inputTodo.errors?.required">
+           Todo is required 
+        </div>
+        <div *ngIf="inputTodo.errors?.minlength">
+          Todo Minimum Length is {{inputTodo.errors?.minlength.requiredLength}}
+        </div>
+      </div>
 </form>

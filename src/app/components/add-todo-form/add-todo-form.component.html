@@ -5,10 +5,16 @@
         name="inputTodo"
         placeholder="ENTER todo "
         class = "form-control"
-        required ngModel #inputTodo="ngModel" />
+        required  minlength="4" ngModel #inputTodo="ngModel" />
         <button  [disabled] = "inputTodo.invalid" type="submit" value="Add Todo" class="btn btn-primary">Submit</button>
-        <br>
 
     </div>
-    <div [hidden] = "inputTodo.valid" class="alert alert-danger">Todo Tidak Boleh Kosong!!!</div>
+    <div *ngIf="!inputTodo?.valid" style="color:red;">
+        <div *ngIf="inputTodo.errors?.required">
+           Todo is required 
+        </div>
+        <div *ngIf="inputTodo.errors?.minlength">
+          Todo Minimum Length is {{inputTodo.errors?.minlength.requiredLength}}
+        </div>
+      </div>
 </form>
